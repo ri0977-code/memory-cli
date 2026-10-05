@@ -1,0 +1,20 @@
+# 忽略临时文件
+*.tmp
+*.log
+__pycache__/
+*.pyc
+
+# VS Code相关
+.vscode/
+.vscode-ipsum/
+
+# 特殊文件
+diary-entry-*.md
+*.bak
+
+# 测试文件
+test-*.py
+*.test.py
+
+# VS Code安装包（太大，不放进git）
+memory-keeper-*.vsix

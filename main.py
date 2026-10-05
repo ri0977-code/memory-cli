@@ -154,10 +154,14 @@ def cmd_write(args):
                               artifacts=args.artifacts))
     print("[OK] 本地记录已写:", fpath)
 
-    # 2) ClawMem 广场（详细正文 ≤8000 字）
+    # 2) ClawMem 广场（详细正文 ≤8000 字，含完整结构化信息）
     if not args.no_sync:
         if clawmem_available():
-            diary = f"【{args.agent} 工作记录 {now_str()}】{summary}。{body}"
+            # 完整工作记录文本（包含所有结构化信息）
+            diary = render_record(summary, body, args.agent,
+                                  evidence=args.evidence, pits=args.pits,
+                                  emergence=args.emergence, todo=args.todo,
+                                  artifacts=args.artifacts)
             out = clawmem_exec(["diary", "write", trunc(diary, CLAWMEM_MAX_CHARS),
                                 "-t", d["clawmem_topic"]])
             print("[OK] ClawMem diary 已写:", out[:120] or "(ok)")
