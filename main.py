@@ -162,7 +162,9 @@ def cmd_write(args):
                                   evidence=args.evidence, pits=args.pits,
                                   emergence=args.emergence, todo=args.todo,
                                   artifacts=args.artifacts)
-            out = clawmem_exec(["diary", "write", trunc(diary, CLAWMEM_MAX_CHARS),
+            # 修复：Windows命令行不支持多行参数，先转单行（仿doubao-log.ps1）
+            single_line = re.sub(r"\s+", " ", diary).strip()
+            out = clawmem_exec(["diary", "write", trunc(single_line, CLAWMEM_MAX_CHARS),
                                 "-t", d["clawmem_topic"]])
             print("[OK] ClawMem diary 已写:", out[:120] or "(ok)")
         else:
